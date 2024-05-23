@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Lab22.DocumentForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <DockPanel>
+            <ToolBar DockPanel.Dock="Top">
+                <Button Content="Font" Click="ChangeFont_Click"/>
+                <Separator/>
+                <Button Content="Color" Click="ChangeColor_Click"/>
+                <Separator/>
+                <Button Content="Insert Image" Click="InsertImage_Click"/>
+                <Separator/>
+                <Button Content="Left" Click="AlignLeft_Click"/>
+                <Separator/>
+                <Button Content="Center" Click="AlignCenter_Click"/>
+                <Separator/>
+                <Button Content="Right" Click="AlignRight_Click"/>
+                <Separator/>
+                <Button Content="Justify" Click="AlignJustify_Click"/>
+            </ToolBar>
+            <RichTextBox Name="Editor" Margin="5"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

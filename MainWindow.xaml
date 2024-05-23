@@ -1,0 +1,66 @@
+﻿<Window x:Class="Lab22.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Lab22"
+        Title="Multi-Window Text Editor" Height="450" Width="800">
+    <Window.Resources>
+        <!-- Define color resources -->
+        <SolidColorBrush x:Key="BackgroundColor" Color="#FFFFFF"/>
+        <!-- Background color -->
+        <SolidColorBrush x:Key="ForegroundColor" Color="#000000"/>
+        <!-- Text color -->
+        <SolidColorBrush x:Key="MenuBackgroundColor" Color="#F0F0F0"/>
+        <!-- Menu background color -->
+        <SolidColorBrush x:Key="MenuForegroundColor" Color="#000000"/>
+        <!-- Menu text color -->
+        <SolidColorBrush x:Key="StatusBarBackgroundColor" Color="#E0E0E0"/>
+        <!-- Status bar background color -->
+        <SolidColorBrush x:Key="StatusBarForegroundColor" Color="#000000"/>
+        <!-- Status bar text color -->
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource MenuForegroundColor}"/>
+        </Style>
+        <Style TargetType="StatusBar">
+            <Setter Property="Background" Value="{StaticResource StatusBarBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource StatusBarForegroundColor}"/>
+        </Style>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="NewFile_Executed"/>
+        <CommandBinding Command="Open" Executed="OpenFile_Executed"/>
+        <CommandBinding Command="Save" Executed="SaveFile_Executed"/>
+        <CommandBinding Command="local:MainWindow.InsertImageCommand" Executed="InsertImage_Executed"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="New"/>
+        <KeyBinding Key="O" Modifiers="Control" Command="Open"/>
+        <KeyBinding Key="S" Modifiers="Control" Command="Save"/>
+    </Window.InputBindings>
+    <DockPanel Background="{StaticResource BackgroundColor}">
+        <Menu DockPanel.Dock="Top" Name="MainMenu">
+            <MenuItem Header="{DynamicResource File}">
+                <MenuItem Header="{DynamicResource New}" Command="New" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="{DynamicResource Open}" Command="Open" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="{DynamicResource Save}" Name="SaveMenuItem" Command="Save" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="{DynamicResource SaveAs}" Name="SaveAsMenuItem" Click="SaveFileAs_Click" IsEnabled="False"/>
+                <Separator/>
+                <MenuItem Header="{DynamicResource Settings}" Click="Settings_Click" InputGestureText="Ctrl+P"/>
+                <Separator/>
+                <MenuItem Header="{DynamicResource Exit}" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource Format}">
+                <MenuItem Header="{DynamicResource Font}" Click="Font_Click"/>
+                <MenuItem Header="{DynamicResource Color}" Click="Color_Click"/>
+                <MenuItem Header="{DynamicResource InsertImage}" Command="local:MainWindow.InsertImageCommand"/>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource Help}">
+                <MenuItem Header="{DynamicResource About}" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Content="{DynamicResource Ready}"/>
+        </StatusBar>
+        <TabControl x:Name="DocumentTabs" DockPanel.Dock="Top" Margin="5"/>
+    </DockPanel>
+</Window>
